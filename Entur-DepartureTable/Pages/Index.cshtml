@@ -1,27 +1,27 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Timetable";
+    ViewData["Title"] = "Ski stasjon";
 }
+<div class="container d-flex justify-content-center">
+    <h1>@ViewData["Title"]</h1>
+</div>
 
 <div class="container">
-    <h1>@ViewData["Title"]</h1>
     <div>
-    @if(Model.TimetableModel != null && Model.TimetableModel.data != null && Model.TimetableModel.data.stopPlace != null)
-    {
-        <h3>Departure station: @Model.TimetableModel.data.stopPlace.name</h3>
-    }
     
     @foreach(var item in Model.TimetableModel.data.stopPlace.estimatedCalls)
     {
         <table class="table table-striped">
             <tr>
+                <th>Line</th>
                 <th>Destination</th>
                 <th>Arrival Time</th>
                 <th>Departure Time</th>
                 <th>Expected Departure Time</th>
             </tr>
             <tr>
+                <td>@item.serviceJourney.journeyPattern.line.id.Replace("NSB:Line:", "")</td>
                 <td>@item.destinationDisplay.frontText</td>
                 <td>@item.aimedArrivalTime.ToString("HH:mm")</td>
                 <td>@item.aimedDepartureTime.ToString("HH:mm")</td>
