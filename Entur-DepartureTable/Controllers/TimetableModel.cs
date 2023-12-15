@@ -22,8 +22,22 @@ public class EstimatedCalls {
     public DateTime expectedDepartureTime { get; set; }
     public DateTime date { get; set; }
     public DestinationDisplay destinationDisplay { get; set; }
+    public ServiceJourney serviceJourney { get; set; }
 }
 
 public class DestinationDisplay {
     public string frontText { get; set; }
+}
+
+public class ServiceJourney {
+    public JourneyPattern journeyPattern { get; set; }
+}
+
+public class JourneyPattern {
+    public Line line { get; set; }
+}
+
+public class Line {
+    public string id { get; set; }
+    public string name { get; set; }
 }

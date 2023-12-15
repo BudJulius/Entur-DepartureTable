@@ -26,6 +26,14 @@ public class FetchTimetable {
                         destinationDisplay {{
                             frontText
                         }}
+                        serviceJourney {{
+                            journeyPattern {{
+                                line {{
+                                    id
+                                    name
+                                }}
+                            }}
+                        }}
                     }}
                 }}
             }}"

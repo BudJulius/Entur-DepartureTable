@@ -12,11 +12,21 @@ public class IndexModel : PageModel
     {
         _logger = logger;
     }
-    public TimetableModel TimetableModel { get; set; }
+    public TimetableModel TimetableModelTrain { get; set; }
+    public TimetableModel TimetableModelBus { get; set; }
     public void OnGet()
     {
         var fetchTimetable = new FetchTimetable();
+        // NSR codes:
+        // 127 = Ski stasjon (train)
+        // 4992 = Ski stasjon Jernbaneveien (bus)
+
+        // TODO: find codes for Drammen
+
         var timetableJson = fetchTimetable.fetchTimetablebyNSR("127");
-        TimetableModel = JsonSerializer.Deserialize<TimetableModel>(timetableJson);
+        TimetableModelTrain = JsonSerializer.Deserialize<TimetableModel>(timetableJson);
+
+        var timetableJsonBus = fetchTimetable.fetchTimetablebyNSR("4992");
+        TimetableModelBus = JsonSerializer.Deserialize<TimetableModel>(timetableJsonBus);
     }
 }
