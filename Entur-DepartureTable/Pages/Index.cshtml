@@ -1,10 +1,37 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Timetable";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div>
+    @if(Model.TimetableModel != null && Model.TimetableModel.data != null && Model.TimetableModel.data.stopPlace != null)
+    {
+        <h3>Departure station: @Model.TimetableModel.data.stopPlace.name</h3>
+    }
+    
+    @foreach(var item in Model.TimetableModel.data.stopPlace.estimatedCalls)
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>Destination</th>
+                <th>Arrival Time</th>
+                <th>Departure Time</th>
+                <th>Expected Departure Time</th>
+            </tr>
+            <tr>
+                <td>@item.destinationDisplay.frontText</td>
+                <td>@item.aimedArrivalTime.ToString("HH:mm")</td>
+                <td>@item.aimedDepartureTime.ToString("HH:mm")</td>
+                @if (item.expectedDepartureTime != item.aimedDepartureTime) {
+                    <td style="color:red;">@item.expectedDepartureTime.ToString("HH:mm")</td>
+                } else {
+                    <td>@item.expectedDepartureTime.ToString("HH:mm")</td>
+                }
+            </tr>
+        </table>
+    }
+</div>
 </div>
