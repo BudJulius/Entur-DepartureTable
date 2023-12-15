@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,9 +12,11 @@ public class IndexModel : PageModel
     {
         _logger = logger;
     }
-
+    public TimetableModel TimetableModel { get; set; }
     public void OnGet()
     {
-
+        var fetchTimetable = new FetchTimetable();
+        var timetableJson = fetchTimetable.fetchTimetablebyNSR("127");
+        TimetableModel = JsonSerializer.Deserialize<TimetableModel>(timetableJson);
     }
 }

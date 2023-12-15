@@ -11,11 +11,6 @@ public class FetchTimetable {
         var graphQLEndpoint = "https://api.entur.io/journey-planner/v3/graphql";
         var stopPlace = $"NSR:StopPlace:{StopPlaceID}";
 
-        // var query = new
-        //     {
-        //         query = "{ stopPlace(id: \"NSR:StopPlace:127\") { id name estimatedCalls(timeRange:72100, numberOfDepartures: 10) {" + 
-        //         "aimedArrivalTime aimedDepartureTime expectedArrivalTime expectedDepartureTime date destinationDisplay {frontText}}} }"
-        //     };
         var query = new
         {
             query = $@"{{
@@ -37,6 +32,7 @@ public class FetchTimetable {
         };
 
         using (var client = new HttpClient()) {
+            client.DefaultRequestHeaders.Add("ET-Client-Name", "ingraphic-departureboard");
             var response = client.PostAsJsonAsync(graphQLEndpoint, query).Result;
             if (response.IsSuccessStatusCode) {
                 var result = response.Content.ReadAsStringAsync().Result;
