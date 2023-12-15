@@ -7,8 +7,9 @@ n = new Date();
 y = n.getFullYear();
 m = n.getMonth() + 1;
 d = n.getDate();
-document.getElementById("date").innerHTML = m + "." + d + "." + y;
+document.getElementById("date").innerHTML = d + "." + m + "." + y;
 
 h = n.getHours();
 min = n.getMinutes();
+min = min < 10 ? '0' + min : min;
 document.getElementById("time").innerHTML = h + ":" + min;
