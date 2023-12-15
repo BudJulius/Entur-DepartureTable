@@ -4,12 +4,14 @@
     ViewData["Title"] = @Model.TimetableModelTrain.data.stopPlace.name;
 }
 <div class="container d-flex justify-content-center">
-    <h1 style="margin-bottom: 2em;">@Model.TimetableModelTrain.data.stopPlace.name</h1>
+    <h1 style="margin-bottom: 2em; margin-top: 1em;">@Model.TimetableModelTrain.data.stopPlace.name</h1>
 </div>
 
 <div class="row">
     <div class="col">
-        <h3 class="d-flex justify-content-center">Train</h3>
+        <div class="d-flex justify-content-center">
+            <img src="../train.png" style="width: 5em; height: 5em;">
+        </div>
         <table class="table">
             <tbody>
                 @foreach(var item in Model.TimetableModelTrain.data.stopPlace.estimatedCalls) {
@@ -37,11 +39,13 @@
         </table>
     </div>
 
-    <div class="col-sm-1">
+    <div class="col-sm-2">
     </div>
 
     <div class="col">
-        <h3 class="d-flex justify-content-center">Bus</h3>
+        <div class="d-flex justify-content-center">
+            <img src="../bus.png" style="width: 5em; height: 5em;">
+        </div>
         <table class="table">
             <tbody>
                 @foreach(var item in Model.TimetableModelBus.data.stopPlace.estimatedCalls) {

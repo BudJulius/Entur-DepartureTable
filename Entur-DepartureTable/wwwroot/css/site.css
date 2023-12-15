@@ -18,9 +18,31 @@ html {
 }
 
 body {
+  background-color: #1C2234;
   margin-bottom: 60px;
 }
 
 td {
+  color: white;
   font-size: 1.5rem;
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+.navbar-custom {
+  background-color: #1C2234;
 }
