@@ -1,0 +1,81 @@
+@page
+@model DrammenModel
+@{
+    ViewData["Title"] = @Model.TimetableModelTrain.data.stopPlace.name;
+}
+<div class="container d-flex justify-content-center">
+    <h1 style="margin-bottom: 2em; margin-top: 1em;">Drammen</h1>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-center">
+            <h2>@Model.TimetableModelTrain.data.stopPlace.name</h2> <br>
+        </div>
+        <div class="d-flex justify-content-center">
+            <img src="../train.png" style="width: 5em; height: 5em;">
+        </div>
+        <table class="table">
+            <tbody>
+                @foreach(var item in Model.TimetableModelTrain.data.stopPlace.estimatedCalls) {
+                    DateTime currentTime = DateTime.Now;
+                    DateTime departureTime;
+
+                    <tr>
+                        <td>@item.serviceJourney.journeyPattern.line.id.Replace("NSB:Line:", "").Replace("GOA:Line:", "")
+                                @item.destinationDisplay.frontText</td>
+                                
+                        @if (DateTime.TryParse(item.expectedDepartureTime.ToString(), out departureTime)) {
+                            TimeSpan timeDifference = departureTime - currentTime;
+                            if (timeDifference.TotalMinutes <= 15 && timeDifference.TotalMinutes >= 0) {
+                                <td style="color:green;">@(timeDifference.Minutes) min</td>
+                            }
+                            else if (item.expectedDepartureTime != item.aimedDepartureTime) {
+                                <td style="color:red;">@item.expectedDepartureTime.ToString("HH:mm")</td>
+                            } else {
+                                <td>@item.expectedDepartureTime.ToString("HH:mm")</td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-sm-2">
+    </div>
+
+    <div class="col">
+        <div class="d-flex justify-content-center">
+            <h2>@Model.TimetableModelBus.data.stopPlace.name</h2>
+        </div>
+        <div class="d-flex justify-content-center">
+            <img src="../bus.png" style="width: 5em; height: 5em;">
+        </div>
+        <table class="table">
+            <tbody>
+                @foreach(var item in Model.TimetableModelBus.data.stopPlace.estimatedCalls) {
+                    DateTime currentTime = DateTime.Now;
+                    DateTime departureTime;
+
+                    <tr>
+                        <td>@item.serviceJourney.journeyPattern.line.id.Replace("BRA:Line:4_", "").Replace("RUT:Line:", "")
+                                @item.destinationDisplay.frontText</td>
+
+                        @if (DateTime.TryParse(item.expectedDepartureTime.ToString(), out departureTime)) {
+                            TimeSpan timeDifference = departureTime - currentTime;
+                            if (timeDifference.TotalMinutes <= 15 && timeDifference.TotalMinutes >= 0) {
+                                <td style="color:green;">@(timeDifference.Minutes) min</td>
+                            }
+                            else if (item.expectedDepartureTime != item.aimedDepartureTime) {
+                                <td style="color:red;">@item.expectedDepartureTime.ToString("HH:mm")</td>
+                            } else {
+                                <td>@item.expectedDepartureTime.ToString("HH:mm")</td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

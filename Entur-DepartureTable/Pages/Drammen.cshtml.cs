@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Entur_DepartureTable.Pages;
 
-public class IndexModel : PageModel
+public class DrammenModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ILogger<DrammenModel> _logger;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public DrammenModel(ILogger<DrammenModel> logger)
     {
         _logger = logger;
     }
@@ -20,13 +20,17 @@ public class IndexModel : PageModel
         // NSR codes:
         // 127 = Ski stasjon (train)
         // 4992 = Ski stasjon Jernbaneveien (bus)
+        // 11 = Drammen stasjon (train)
+        // 17348 = Drammen Tinghuset (bus)
+        // 17349 = Drammen Losjeplassen (bus)
+        // 16808 = Drammen Bragernes torg (bus)
 
         // TODO: find codes for Drammen
 
-        var timetableJson = fetchTimetable.fetchTimetablebyNSR("127");
+        var timetableJson = fetchTimetable.fetchTimetablebyNSR("11");
         TimetableModelTrain = JsonSerializer.Deserialize<TimetableModel>(timetableJson);
 
-        var timetableJsonBus = fetchTimetable.fetchTimetablebyNSR("4992");
+        var timetableJsonBus = fetchTimetable.fetchTimetablebyNSR("16808");
         TimetableModelBus = JsonSerializer.Deserialize<TimetableModel>(timetableJsonBus);
     }
 }
