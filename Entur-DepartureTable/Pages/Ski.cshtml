@@ -25,10 +25,10 @@
                         @if (DateTime.TryParse(item.expectedDepartureTime.ToString(), out departureTime)) {
                             TimeSpan timeDifference = departureTime - currentTime;
                             if (timeDifference.TotalMinutes <= 15 && timeDifference.TotalMinutes >= 0) {
-                                <td style="color:green;">@(timeDifference.Minutes) min</td>
+                                <td style="color:#85CB5C;">@(timeDifference.Minutes) min</td>
                             }
                             else if (item.expectedDepartureTime != item.aimedDepartureTime) {
-                                <td style="color:red;">@item.expectedDepartureTime.ToString("HH:mm")</td>
+                                <td style="color:#FF3E1B;">@item.expectedDepartureTime.ToString("HH:mm")</td>
                             } else {
                                 <td>@item.expectedDepartureTime.ToString("HH:mm")</td>
                             }
@@ -59,10 +59,10 @@
                         @if (DateTime.TryParse(item.expectedDepartureTime.ToString(), out departureTime)) {
                             TimeSpan timeDifference = departureTime - currentTime;
                             if (timeDifference.TotalMinutes <= 15 && timeDifference.TotalMinutes >= 0) {
-                                <td style="color:green;">@(timeDifference.Minutes) min</td>
+                                <td style="color:#85CB5C;">@(timeDifference.Minutes) min</td>
                             }
                             else if (item.expectedDepartureTime != item.aimedDepartureTime) {
-                                <td style="color:red;">@item.expectedDepartureTime.ToString("HH:mm")</td>
+                                <td style="color:#FF3E1B;">@item.expectedDepartureTime.ToString("HH:mm")</td>
                             } else {
                                 <td>@item.expectedDepartureTime.ToString("HH:mm")</td>
                             }
